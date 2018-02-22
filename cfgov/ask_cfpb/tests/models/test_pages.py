@@ -95,7 +95,7 @@ class OutputScriptFunctionTests(unittest.TestCase):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d")
         slug = 'ask-cfpb-{}.csv'.format(timestamp)
         m = mock_open()
-        with patch('__builtin__.open', m, create=True):
+        with patch('six.moves.builtins.open', m, create=True):
             export_questions()
         self.assertEqual(mock_output.call_count, 1)
         m.assert_called_once_with("/tmp/{}".format(slug), 'w')
