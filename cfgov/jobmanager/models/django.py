@@ -1,5 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
+import six
+
 from django.db import models
 
 from wagtail.wagtailadmin.edit_handlers import (
@@ -11,47 +13,54 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 
+@six.python_2_unicode_compatible
 class ApplicantType(models.Model):
     applicant_type = models.CharField(max_length=255)
     description = models.TextField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.applicant_type
 
     class Meta:
         ordering = ['applicant_type']
 
 
+@six.python_2_unicode_compatible
 class Grade(models.Model):
     grade = models.CharField(max_length=32)
     salary_min = models.IntegerField()
     salary_max = models.IntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.grade
+
+    def __lt__(self, other):
+        return (self.grade < other.grade)
 
     class Meta:
         ordering = ['grade']
 
 
+@six.python_2_unicode_compatible
 class JobCategory(models.Model):
     job_category = models.CharField(max_length=255)
     blurb = RichTextField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.job_category
 
     class Meta:
         ordering = ['job_category']
 
 
+@six.python_2_unicode_compatible
 class JobLocation(ClusterableModel):
     abbreviation = models.CharField(
         max_length=2,
         primary_key=True)
     name = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -75,6 +84,7 @@ class Office(JobLocation):
     ]
 
 
+@six.python_2_unicode_compatible
 class State(models.Model):
     name = models.CharField(
         max_length=255,
@@ -86,13 +96,14 @@ class State(models.Model):
         'Region',
         related_name="states")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
         ordering = ('abbreviation',)
 
 
+@six.python_2_unicode_compatible
 class City(models.Model):
     name = models.CharField(
         max_length=255,
@@ -111,5 +122,5 @@ class City(models.Model):
     class Meta:
         ordering = ('state_id', 'name')
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}, {}'.format(self.name, self.state.abbreviation)

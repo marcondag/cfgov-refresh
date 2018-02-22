@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from six import string_types as basestring
 
 from django.core.exceptions import ValidationError

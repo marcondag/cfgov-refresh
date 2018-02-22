@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import six
+
 from django.db import models
 from django.utils.http import urlquote
 
@@ -56,6 +58,7 @@ class USAJobsApplicationLink(Orderable, models.Model):
     ]
 
 
+@six.python_2_unicode_compatible
 class GradePanel(Orderable, models.Model):
     grade = models.ForeignKey(Grade, related_name='grade_panels')
     job_listing = ParentalKey(JobListingPage, related_name='grades')
@@ -67,5 +70,5 @@ class GradePanel(Orderable, models.Model):
         FieldPanel('grade'),
     ]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.grade.grade
