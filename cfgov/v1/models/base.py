@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.template.response import TemplateResponse
 from django.utils import timezone, translation
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 
@@ -402,13 +403,14 @@ class PasswordHistoryItem(models.Model):
 
 
 # User Failed Login Attempts
+@python_2_unicode_compatible
 class FailedLoginAttempt(models.Model):
     user = models.OneToOneField(User)
     # comma-separated timestamp values, right now it's a 10 digit number,
     # so we can store about 91 last failed attempts
     failed_attempts = models.CharField(max_length=1000)
 
-    def __unicode__(self):
+    def __str__(self):
         attempts_no = (0 if not self.failed_attempts
                        else len(self.failed_attempts.split(',')))
         return "%s has %s failed login attempts" % (self.user, attempts_no)

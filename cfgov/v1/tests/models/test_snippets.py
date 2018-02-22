@@ -1,3 +1,7 @@
+import six
+import unittest
+from six import text_type as unicode
+
 from django.test import TestCase
 
 from wagtail.tests.testapp.models import SimplePage
@@ -92,7 +96,9 @@ class TestOrderedResources(TestCase):
         )
 
 
+@unittest.skipIf(six.PY3, "Unicode is the default encoding in Python 3")
 class TestUnicodeCompatibility(TestCase):
+
     def test_unicode_contact_heading_str(self):
         contact = Contact(heading=u'Unicod\xeb')
         self.assertEqual(str(contact), 'Unicod\xc3\xab')

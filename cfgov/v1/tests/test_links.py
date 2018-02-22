@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.http import HttpRequest
 from django.template import engines
 from django.template.response import TemplateResponse
@@ -67,7 +69,7 @@ class GetProtectedUrlTestCase(TestCase):
         response = TemplateResponse(request, template, context)
         response.render()
 
-        self.assertEqual(response.content, 'url: /foo/')
+        self.assertEqual(response.content, b'url: /foo/')
 
     def make_page(self, path, live):
         page = CFGOVPage(slug=path, title=path)
