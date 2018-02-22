@@ -1,6 +1,7 @@
 import warnings
 
 from six import string_types as basestring
+from six import iteritems
 
 from django.conf import settings
 
@@ -37,6 +38,6 @@ def _process_data(field):
         for i, value in enumerate(field):
             field[i] = _process_data(value)
     elif isinstance(field, dict):
-        for key, value in field.iteritems():
+        for key, value in iteritems(field):
             field[key] = _process_data(value)
     return field

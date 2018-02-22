@@ -51,5 +51,5 @@ class TestProcessExternalLinks(TestCase):
             doc = '<img src="http://foo.bucket/img.png"/>'
             self.assertEqual(
                 process_external_links(doc),
-                '<img src="https://s3.amazonaws.com/foo.bucket/img.png"/>'
+                b'<img src="https://s3.amazonaws.com/foo.bucket/img.png"/>'
             )
