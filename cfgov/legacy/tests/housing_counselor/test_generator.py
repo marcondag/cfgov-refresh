@@ -41,7 +41,7 @@ class TestGeneratorCounselorJson(TestCase):
 
     def test_generate_creates_json_files(self):
         generate_counselor_json(self.counselors, self.zipcodes, self.tempdir)
-        self.assertItemsEqual(
+        self.assertEqual(
             os.listdir(self.tempdir),  # os.listdir order not guaranteed.
             ['20001.json', '20002.json']
         )
@@ -74,7 +74,7 @@ class TestGeneratorCounselorJson(TestCase):
         ]
 
         for a, b in zip(agencies, expected_agencies):
-            self.assertItemsEqual(a.keys(), b.keys())
+            self.assertEqual(a.keys(), b.keys())
 
             for k in a:
                 self.assertAlmostEqual(a[k], b[k])
