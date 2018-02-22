@@ -102,7 +102,7 @@ class TestConferenceExporter(TestCase):
         )
         self.assertEqual(
             ConferenceExporter.prepare_field(attendee, 'organization'),
-            'Citro\xc3\xabn'
+            b'Citro\xc3\xabn'
         )
 
     def test_prepare_field_to_row_sessions(self):
@@ -112,14 +112,14 @@ class TestConferenceExporter(TestCase):
         )
         self.assertEqual(
             ConferenceExporter.prepare_field(attendee, 'sessions'),
-            'Morning,Afternoon'
+            b'Morning,Afternoon'
         )
 
     def test_prepare_field_to_row_no_sessions(self):
         attendee = mommy.prepare(ConferenceRegistration, sessions='')
         self.assertEqual(
             ConferenceExporter.prepare_field(attendee, 'sessions'),
-            ''
+            b''
         )
 
     def test_email_message_subject_not_at_capacity(self):

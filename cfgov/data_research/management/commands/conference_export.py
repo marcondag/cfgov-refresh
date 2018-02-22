@@ -3,7 +3,7 @@ from __future__ import print_function
 import csv
 import json
 import logging
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand

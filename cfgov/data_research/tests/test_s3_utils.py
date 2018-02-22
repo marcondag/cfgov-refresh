@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import json
 import unittest
-from cStringIO import StringIO
+from six import BytesIO
 
 import mock
 import unicodecsv
@@ -23,11 +23,11 @@ class S3UtilsTests(unittest.TestCase):
 
     @mock.patch('data_research.mortgage_utilities.s3_utils.requests.get')
     def test_read_in_s3_csv(self, mock_requests):
-        mock_requests.return_value.content = 'a,b,c\nd,e,f'
+        mock_requests.return_value.content = b'a,b,c\nd,e,f'
         reader = read_in_s3_csv('fake-s3-url.com')
         self.assertEqual(mock_requests.call_count, 1)
         self.assertEqual(reader.fieldnames, ['a', 'b', 'c'])
-        self.assertEqual(sorted(reader.next().values()), ['d', 'e', 'f'])
+        self.assertEqual(sorted(next(reader).values()), ['d', 'e', 'f'])
 
     @mock.patch('data_research.mortgage_utilities.s3_utils.requests.get')
     def test_read_in_s3_json(self, mock_requests):
@@ -51,7 +51,7 @@ class S3UtilsTests(unittest.TestCase):
     def test_bake_csv_to_s3(self, mock_connect):
         mock_get_bucket = mock.Mock()
         mock_connect.get_bucket.return_value = mock_get_bucket
-        csvfile = StringIO()
+        csvfile = BytesIO()
         writer = unicodecsv.writer(csvfile)
         writer.writerow(['a', 'b', 'c'])
         writer.writerow(['1', '2', '3'])
