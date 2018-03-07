@@ -433,6 +433,11 @@ urlpatterns = [
                 r'^tdp/',
                 include_if_app_enabled('teachers_digital_platform',
                                        'teachers_digital_platform.urls')),
+
+    flagged_url('REGULATIONS_3000',
+                r'^regulations/',
+                include_if_app_enabled('regulations',
+                                       'regulations.urls')),
 ]
 
 if settings.ALLOW_ADMIN_URL:

@@ -85,19 +85,19 @@ INSTALLED_APPS = (
 )
 
 OPTIONAL_APPS = [
+    {'import': 'ccdb5_ui', 'apps': ('ccdb5_ui', )},
     {'import': 'comparisontool', 'apps': ('comparisontool', 'haystack',)},
+    {'import': 'complaint',
+     'apps': ('complaint','complaintdatabase', 'complaint_common',)},
+    {'import': 'complaint_search', 'apps': ('complaint_search', 'rest_framework')},
+    {'import': 'countylimits', 'apps': ('countylimits', 'rest_framework')},
+    {'import': 'hud_api_replace', 'apps': ('hud_api_replace',)},
     {'import': 'paying_for_college',
      'apps': ('paying_for_college', 'haystack',)},
-    {'import': 'hud_api_replace', 'apps': ('hud_api_replace',)},
-    {'import': 'retirement_api', 'apps': ('retirement_api',)},
-    {'import': 'complaint', 'apps': ('complaint',
-     'complaintdatabase', 'complaint_common',)},
     {'import': 'ratechecker', 'apps': ('ratechecker', 'rest_framework')},
-    {'import': 'countylimits', 'apps': ('countylimits', 'rest_framework')},
     {'import': 'regcore', 'apps': ('regcore', 'regcore_read')},
     {'import': 'regulations', 'apps': ('regulations',)},
-    {'import': 'complaint_search', 'apps': ('complaint_search', 'rest_framework')},
-    {'import': 'ccdb5_ui', 'apps': ('ccdb5_ui', )},
+    {'import': 'retirement_api', 'apps': ('retirement_api',)},
     {'import': 'teachers_digital_platform', 'apps': ('teachers_digital_platform', )},
 ]
 
@@ -638,6 +638,9 @@ FLAGS = {
     'PING_GOOGLE_ON_PUBLISH': {
         'boolean': DEPLOY_ENVIRONMENT == 'production'
     },
+
+    # Regulations 3000
+    'REGULATIONS_3000': {},
 }
 
 
