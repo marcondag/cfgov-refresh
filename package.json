@@ -62,7 +62,8 @@
     "vinyl-named": "1.1.0",
     "webpack": "4.10.2",
     "webpack-stream": "4.0.3",
-    "xdr": "0.5.3"
+    "xdr": "0.5.3",
+    "snyk": "^1.83.0"
   },
   "devDependencies": {
     "babel-jest": "23.0.1",
@@ -85,7 +86,6 @@
     "psi": "3.1.0",
     "sauce-connect-tunnel": "0.2.1",
     "selenium-webdriver": "4.0.0-alpha.1",
-    "snyk": "1.82.1",
     "through2": "2.0.3",
     "wcag": "0.3.0",
     "yargs": "11.0.0"
@@ -93,7 +93,9 @@
   "scripts": {
     "postinstall": "node scripts/npm/apps-install",
     "preinstall": "npx enforce-node-version || (echo 'Please install npm v5.2 or greater' && exit 1)",
-    "test": "snyk test"
+    "test": "snyk test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "snyk": true
 }
