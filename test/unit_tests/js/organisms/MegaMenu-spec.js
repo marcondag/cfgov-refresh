@@ -328,6 +328,7 @@ describe( 'MegaMenu', () => {
 
   describe( 'collapse', () => {
     it( 'should not be expanded by default', () => {
+      window.innerWidth = 420;
       const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
       const defaultExpanded = firstContent.getAttribute( 'aria-expanded' );
 
@@ -340,13 +341,33 @@ describe( 'MegaMenu', () => {
       const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
       let isExpanded;
 
-      firstContent.addEventListener( 'transitionend', function( event ) {
+      function resolveClick() {
         isExpanded = firstContent.getAttribute( 'aria-expanded' );
         expect( isExpanded ).toEqual( 'true' );
         done();
-      }, false );
+      };
 
       simulateEvent( 'click', menuTrigger );
+
+      window.setTimeout(resolveClick, 1000);
+    } );
+
+    it( 'should close when calling the collapse method', done => {
+      window.innerWidth = 420;
+      const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
+      const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
+      let isExpanded;
+
+      function resolveClick() {
+        megaMenu.collapse();
+        isExpanded = firstContent.getAttribute( 'aria-expanded' );
+        expect( isExpanded ).toEqual( 'false' );
+        done();
+      };
+
+      simulateEvent( 'click', menuTrigger );
+
+      window.setTimeout(resolveClick, 1000);
     } );
   } );
 } );
