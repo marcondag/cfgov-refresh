@@ -345,11 +345,11 @@ describe( 'MegaMenu', () => {
         isExpanded = firstContent.getAttribute( 'aria-expanded' );
         expect( isExpanded ).toEqual( 'true' );
         done();
-      };
+      }
 
       simulateEvent( 'click', menuTrigger );
 
-      window.setTimeout(resolveClick, 1000);
+      window.setTimeout( resolveClick, 1000 );
     } );
 
     it( 'should close when calling the collapse method', done => {
@@ -363,11 +363,11 @@ describe( 'MegaMenu', () => {
         isExpanded = firstContent.getAttribute( 'aria-expanded' );
         expect( isExpanded ).toEqual( 'false' );
         done();
-      };
+      }
 
       simulateEvent( 'click', menuTrigger );
 
-      window.setTimeout(resolveClick, 1000);
+      window.setTimeout( resolveClick, 1000 );
     } );
   } );
 } );
