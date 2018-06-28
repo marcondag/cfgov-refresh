@@ -1,3 +1,5 @@
+import { simulateEvent } from '../../../util/simulate-event';
+
 const BASE_JS_PATH = '../../../../cfgov/unprocessed/js/';
 const MegaMenu = require( BASE_JS_PATH + 'organisms/MegaMenu' );
 const BASE_CLASS = 'o-mega-menu';
@@ -13,7 +15,7 @@ const HTML_SNIPPET = `
         <span class="u-visually-hidden">Menu</span>
     </button>
 
-    <div class="o-mega-menu_content o-mega-menu_content-1 u-hidden-overflow u-move-transition u-move-to-origin" aria-expanded="true" data-js-hook="behavior_flyout-menu_content">
+    <div class="o-mega-menu_content o-mega-menu_content-1 u-hidden-overflow u-move-transition u-move-to-origin" aria-expanded="false" data-js-hook="behavior_flyout-menu_content">
         <div class="o-mega-menu_content-wrapper o-mega-menu_content-1-wrapper ">
 
             <div class="o-mega-menu_content-grid o-mega-menu_content-1-grid o-mega-menu_content-1-grid__three-col">
@@ -324,12 +326,39 @@ describe( 'MegaMenu', () => {
     } );
   } );
 
+  describe( 'addEventListener', () => {
+    it( '...', () => {
+      const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
+
+      let event;
+
+      megaMenu.addEventListener( 'click', () => {
+        event = 'clicked';
+      } );
+
+      simulateEvent( 'click', menuTrigger );
+
+      expect( event ).toEqual( 'clicked' );
+    } );
+  } );
+
   describe( 'collapse', () => {
     it( 'should not be expanded by default', () => {
-      const firstContent = navElem.querySelector( '.o-mega-menu_content-1' )
+      const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
       const defaultExpanded = firstContent.getAttribute( 'aria-expanded' );
 
-      expect( defaultExpanded ).toEqual( false );
+      expect( defaultExpanded ).toEqual( 'false' );
+    } );
+
+    xit( 'should expand on click', () => {
+      const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
+      const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
+
+      simulateEvent( 'click', menuTrigger );
+
+      const isExpanded = firstContent.getAttribute( 'aria-expanded' );
+
+      expect( isExpanded ).toEqual( 'true' );
     } );
   } );
 } );
