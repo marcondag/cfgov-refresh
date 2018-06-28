@@ -326,22 +326,6 @@ describe( 'MegaMenu', () => {
     } );
   } );
 
-  describe( 'addEventListener', () => {
-    it( '...', () => {
-      const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
-
-      let event;
-
-      megaMenu.addEventListener( 'click', () => {
-        event = 'clicked';
-      } );
-
-      simulateEvent( 'click', menuTrigger );
-
-      expect( event ).toEqual( 'clicked' );
-    } );
-  } );
-
   describe( 'collapse', () => {
     it( 'should not be expanded by default', () => {
       const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
@@ -350,15 +334,19 @@ describe( 'MegaMenu', () => {
       expect( defaultExpanded ).toEqual( 'false' );
     } );
 
-    xit( 'should expand on click', () => {
+    it( 'should expand on click', done => {
+      window.innerWidth = 420;
       const firstContent = navElem.querySelector( '.o-mega-menu_content-1' );
       const menuTrigger = navElem.querySelector( '.o-mega-menu_trigger' );
+      let isExpanded;
+
+      firstContent.addEventListener( 'transitionend', function( event ) {
+        isExpanded = firstContent.getAttribute( 'aria-expanded' );
+        expect( isExpanded ).toEqual( 'true' );
+        done();
+      }, false );
 
       simulateEvent( 'click', menuTrigger );
-
-      const isExpanded = firstContent.getAttribute( 'aria-expanded' );
-
-      expect( isExpanded ).toEqual( 'true' );
     } );
   } );
 } );
