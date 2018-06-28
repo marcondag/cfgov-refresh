@@ -95,6 +95,8 @@ function MegaMenu( element ) {
     _tabTrigger.init();
     _tabTrigger.addEventListener( 'tabPressed', _handleTabPress );
 
+    console.log(typeof this);
+
     return this;
   }
 
