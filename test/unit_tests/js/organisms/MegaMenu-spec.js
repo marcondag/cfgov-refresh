@@ -2,7 +2,7 @@ const BASE_JS_PATH = '../../../../cfgov/unprocessed/js/';
 const MegaMenu = require( BASE_JS_PATH + 'organisms/MegaMenu' );
 const BASE_CLASS = 'o-mega-menu';
 const HTML_SNIPPET = `
-<nav class="o-mega-menu" data-js-hook="behavior_flyout-menu state_atomic_init" aria-label="main menu">
+<nav class="o-mega-menu" data-js-hook="behavior_flyout-menu" aria-label="main menu">
     <button class="o-mega-menu_trigger" data-js-hook="behavior_flyout-menu_trigger" aria-haspopup="menu" aria-expanded="true">
         <span class="o-mega-menu_trigger-open">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.5 1200" class="cf-icon-svg"><path d="M65 370.5h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65H65c-35.9 0-65 29.1-65 65s29.1 65 65 65zM719.5 515H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65zM719.5 789.4H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65z"></path></svg>
@@ -309,7 +309,7 @@ describe( 'MegaMenu', () => {
   beforeEach( () => {
     document.body.innerHTML = HTML_SNIPPET;
     navElem = document.querySelector( `.${ BASE_CLASS }` );
-    megaMenu = new MegaMenu( navElem, BASE_CLASS, {} );
+    megaMenu = new MegaMenu( navElem );
     thisMegaMenu = megaMenu.init();
   } );
 
