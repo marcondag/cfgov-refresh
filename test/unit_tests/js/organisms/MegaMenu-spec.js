@@ -3,7 +3,7 @@ const MegaMenu = require( BASE_JS_PATH + 'organisms/MegaMenu' );
 const BASE_CLASS = 'o-mega-menu';
 const HTML_SNIPPET = `
 <nav class="o-mega-menu" data-js-hook="behavior_flyout-menu" aria-label="main menu">
-    <button class="o-mega-menu_trigger" data-js-hook="behavior_flyout-menu_trigger" aria-haspopup="menu" aria-expanded="true">
+    <button class="o-mega-menu_trigger" data-js-hook="behavior_flyout-menu_trigger" aria-haspopup="menu" aria-expanded="false">
         <span class="o-mega-menu_trigger-open">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.5 1200" class="cf-icon-svg"><path d="M65 370.5h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65H65c-35.9 0-65 29.1-65 65s29.1 65 65 65zM719.5 515H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65zM719.5 789.4H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h654.5c35.9 0 65-29.1 65-65s-29.1-65-65-65z"></path></svg>
         </span>
@@ -321,6 +321,15 @@ describe( 'MegaMenu', () => {
 
     it( 'should return undefined if already initialized', () => {
       expect( megaMenu.init() ).toBeUndefined();
+    } );
+  } );
+
+  describe( 'collapse', () => {
+    it( 'should not be expanded by default', () => {
+      const firstContent = navElem.querySelector( '.o-mega-menu_content-1' )
+      const defaultExpanded = firstContent.getAttribute( 'aria-expanded' );
+
+      expect( defaultExpanded ).toEqual( false );
     } );
   } );
 } );
